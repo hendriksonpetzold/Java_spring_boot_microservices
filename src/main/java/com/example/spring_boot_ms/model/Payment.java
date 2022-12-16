@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "payments")
+@Table(name = "payment")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
@@ -22,7 +22,7 @@ public class Payment {
     private  Long id;
     @NotNull
     @Positive
-    private BigDecimal value;
+    private BigDecimal paymentValue;
     @NotBlank
     @Size(max = 100)
     private String name;

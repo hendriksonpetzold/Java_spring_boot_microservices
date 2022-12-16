@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 @Data
 public class PaymentDto {
     private Long id;
-    private BigDecimal value;
+    private BigDecimal paymentValue;
     private String name;
     private String number;
     private String expiration;
     private String code;
     private Status status;
-    private Long wayToPayment;
+    private Long wayToPaymentId;
     private Long requestId;
 }
