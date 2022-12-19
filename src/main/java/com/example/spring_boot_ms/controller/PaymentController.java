@@ -4,6 +4,7 @@ import com.example.spring_boot_ms.dto.PaymentDto;
 import com.example.spring_boot_ms.model.Payment;
 import com.example.spring_boot_ms.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -32,6 +33,11 @@ public class PaymentController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/gate")
+    public String returnGate(@Value("${local.server.port}") String gate){
+        return String.format("Requisição respondida pela instancia executando na porta %s", gate);
+    }
+
     @PostMapping
     public ResponseEntity<PaymentDto> register(@RequestBody @Valid PaymentDto dto, UriComponentsBuilder uriBuilder){
         PaymentDto paymentDto = service.createPayment(dto);
@@ -40,7 +46,7 @@ public class PaymentController {
         return ResponseEntity.created(address).body(paymentDto);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<PaymentDto> attPayment(@PathVariable @NotNull Long id, @RequestBody @Valid PaymentDto dto){
         PaymentDto updated = service.attPayment(id, dto);
         return ResponseEntity.ok(updated);
